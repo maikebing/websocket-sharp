@@ -2109,9 +2109,16 @@ namespace WebSocketSharp
         throw new WebSocketException (
           "The proxy has failed a connection to the requested host and port.");
     }
-
-    // As client
-    private void setClientStream ()
+        public System.Net.IPEndPoint GetLocalEndPoint()
+        {
+            return   ( System.Net.IPEndPoint) _tcpClient?.Client?.LocalEndPoint;
+        }
+        public System.Net.IPEndPoint GetRemoteEndPoint()
+        {
+            return (System.Net.IPEndPoint)_tcpClient?.Client?.RemoteEndPoint;
+        }
+        // As client
+        private void setClientStream ()
     {
       if (_proxyUri != null) {
         _tcpClient = new TcpClient (_proxyUri.DnsSafeHost, _proxyUri.Port);
